@@ -8,11 +8,42 @@
 import SwiftUI
 
 struct AddHabit: View {
+    @State private var title: String = ""
+    @State private var description: String = ""
+    var habitList: HabitList
+    @Binding var path: NavigationPath
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ZStack {
+            VStack {
+                Form {
+                    Section {
+                        TextField("Title", text: $title)
+                        TextField("Description", text: $title, axis: .vertical)
+                            .lineLimit(4, reservesSpace: true)
+                    }
+                    Button {
+                        habitList.value
+                            .append(
+                                .init(
+                                    title: "test",
+                                    description: "kjksafjnkljkfj",
+                                    type: "health"))
+                        path.removeLast()
+                    } label: {
+                        Text("Save")
+                            .font(.title3.bold())
+                            .padding(.vertical, 5)
+                            .frame(maxWidth: .infinity)
+                    }.buttonStyle(.borderedProminent).listRowInsets(
+                        EdgeInsets())
+                }
+            }
+        }.navigationTitle("Add habit").navigationBarTitleDisplayMode(.large)
     }
 }
 
 #Preview {
-    AddHabit()
+    @Previewable @State var pathPrev = NavigationPath()
+    AddHabit(habitList: HabitList(), path: $pathPrev)
 }
