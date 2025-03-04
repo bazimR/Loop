@@ -25,6 +25,18 @@ class PathStore {
 @Observable
 class HabitList {
     var value = [HabitItem]()
+    var healthCount: Int {
+        value.filter { $0.type == "Health" }.count
+    }
+    var goalCount: Int {
+        value.filter { $0.type == "Goal" }.count
+    }
+    var workCount: Int {
+        value.filter { $0.type == "Work" }.count
+    }
+    var otherCount: Int {
+        value.filter { $0.type == "Other" }.count
+    }
 
     func addHabit(_ habit: HabitItem) {
         value.append(habit)
@@ -46,28 +58,24 @@ struct ContentView: View {
         formatter.dateFormat = "d MMMM"
         return formatter.string(from: Date())
     }
-    let habitTypes: [HabitType] = [
-        .init(
-            name: "Health",
-            count: 0,
-            systemImage: "heart.fill",
-            color: .green
-        ),
-        .init(
-            name: "Work",
-            count: 0,
-            systemImage: "briefcase.circle.fill",
-            color: .blue
-        ),
-        .init(name: "Goal", count: 0, systemImage: "target", color: .red),
-        .init(
-            name: "Others",
-            count: 0,
-            systemImage: "folder.fill",
-            color: .yellow
-        ),
+    // Computed property for habit types ✅ Updated dynamically
+    var habitTypes: [HabitType] {
+        [
+            .init(
+                name: "Health", count: habitList.healthCount,
+                systemImage: "heart.fill", color: .green),
+            .init(
+                name: "Work", count: habitList.workCount,
+                systemImage: "briefcase.circle.fill", color: .blue),
+            .init(
+                name: "Goal", count: habitList.goalCount, systemImage: "target",
+                color: .red),
+            .init(
+                name: "Others", count: habitList.otherCount,
+                systemImage: "folder.fill", color: .yellow),
+        ]
+    }
 
-    ]
     var body: some View {
         NavigationStack(path: $pathStore.path) {
             ScrollView {
@@ -146,7 +154,11 @@ struct ContentView: View {
                 destination: { route in
                     switch route {
                     case .add:
-                        AddHabit(habitList: habitList, path: $pathStore.path)
+                        AddHabit(
+                            habitList: habitList,
+                            path: $pathStore.path,
+                            habitTypes: habitTypes
+                        )
                     }
                 }
             )
