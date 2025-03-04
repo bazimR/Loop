@@ -12,11 +12,10 @@ struct Checkbox: View {
     var value: Bool
     var body: some View {
         Button {
-            withAnimation(.bouncy) {
-                onTap()
-            }
+            onTap()
         } label: {
             Image(systemName: value ? "checkmark.square.fill" : "square")
+                .animation(.bouncy, value: value)
         }
     }
 }

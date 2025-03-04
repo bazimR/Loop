@@ -7,13 +7,6 @@
 
 import SwiftUI
 
-struct HabitItem: Codable, Identifiable {
-    var id: UUID = UUID()
-    var title: String
-    var description: String
-    var isCompleted: Bool = false
-    var type: String
-}
 enum Routes {
     case add
 }
@@ -35,7 +28,7 @@ class HabitList {
         value.filter { $0.type == "Work" }.count
     }
     var otherCount: Int {
-        value.filter { $0.type == "Other" }.count
+        value.filter { $0.type == "Others" }.count
     }
 
     func addHabit(_ habit: HabitItem) {
@@ -82,23 +75,7 @@ struct ContentView: View {
                 VStack {
                     LazyVGrid(columns: [GridItem(.adaptive(minimum: 150))]) {
                         ForEach(habitTypes) { type in
-                            VStack(alignment: .leading, spacing: 10) {
-                                Image(systemName: type.systemImage)
-                                    .font(.title).foregroundColor(.white)
-                                HStack(spacing: 5) {
-                                    Text("\(type.count)")
-                                        .font(.headline)
-                                        .foregroundColor(.white)
-                                    Text(type.name)
-                                        .font(.headline)
-                                        .fontWeight(.medium)
-                                        .foregroundColor(.white.opacity(0.6))
-                                }
-                            }.padding().frame(
-                                maxWidth: .infinity, alignment: .leading
-                            ).background(
-                                type.color.opacity(0.7)
-                            ).clipShape(.rect(cornerRadius: 20))
+                            HabitTypeCardView(type: type)
                         }
                     }
                     LazyVStack {
@@ -106,44 +83,14 @@ struct ContentView: View {
                             NavigationLink {
                                 Text("details screen")
                             } label: {
-                                HStack(alignment: .top, spacing: 20) {
-                                    Checkbox(
-                                        onTap: {
-                                            habitList
-                                                .toggleCompletion(
-                                                    for: item.id
-                                                )
-                                        },
-                                        value: item.isCompleted
-                                    )
-                                    .font(.title2)
-                                    .foregroundColor(
-                                        item.isCompleted ? .gray : .primary
-                                    )
-                                    VStack(alignment: .leading) {
-                                        Text(item.title)
-                                            .font(.headline)
-                                            .foregroundColor(
-                                                item.isCompleted
-                                                    ? .gray : .primary
-                                            ).strikethrough(item.isCompleted)
-                                        Text("Others")
-                                            .font(.subheadline)
-                                            .foregroundColor(
-                                                item.isCompleted
-                                                    ? .gray : .yellow
-                                            )
-                                            .padding(.horizontal, 10)
-                                            .padding(.vertical, 5)
-                                            .background(
-                                                item.isCompleted
-                                                    ? .gray.opacity(0.3)
-                                                    : .yellow.opacity(0.3)
-                                            )
-                                            .clipShape(.rect(cornerRadius: 10))
+                                HabitListItem(
+                                    habitItem: item,
+                                    habitTypes: habitTypes,
+                                    toggleCompletion: {
+                                        habitList
+                                            .toggleCompletion(for: $0)
                                     }
-                                    Spacer()
-                                }
+                                )
                             }
                         }
                     }.padding(.top)
