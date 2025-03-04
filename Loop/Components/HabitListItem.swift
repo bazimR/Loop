@@ -11,13 +11,16 @@ struct HabitListItem: View {
 
     let habitItem: HabitItem
     let habitType: HabitType
-
+    var toggleCompletion: (UUID) -> Void
+    var remove: () -> Void
     init(
         habitItem: HabitItem, habitTypes: [HabitType],
-        toggleCompletion: @escaping (UUID) -> Void
+        toggleCompletion: @escaping (UUID) -> Void,
+        remove: @escaping () -> Void
     ) {
         self.habitItem = habitItem
         self.toggleCompletion = toggleCompletion
+        self.remove = remove
         // Find the HabitType that matches the habitItem.type
         if let matchedType = habitTypes.first(where: {
             $0.name.lowercased() == habitItem.type.lowercased()
@@ -27,7 +30,7 @@ struct HabitListItem: View {
             fatalError("Missing HabitType for \(habitItem.type)")
         }
     }
-    var toggleCompletion: (UUID) -> Void
+
     var body: some View {
         HStack(alignment: .top, spacing: 20) {
             Checkbox(
@@ -63,6 +66,12 @@ struct HabitListItem: View {
                     .clipShape(.rect(cornerRadius: 10))
             }
             Spacer()
+            Button(role: .destructive) {
+                remove()
+            } label: {
+                Image(systemName: "trash")
+                    .foregroundColor(.red)
+            }
         }
     }
 }

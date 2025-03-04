@@ -40,6 +40,11 @@ class HabitList {
             value[index].isCompleted.toggle()
         }
     }
+    func removeHabit(for habitId: UUID) {
+        if let index = value.firstIndex(where: { $0.id == habitId }) {
+            value.remove(at: index)
+        }
+    }
 }
 
 struct ContentView: View {
@@ -89,6 +94,9 @@ struct ContentView: View {
                                     toggleCompletion: {
                                         habitList
                                             .toggleCompletion(for: $0)
+                                    },
+                                    remove: {
+                                        habitList.removeHabit(for: item.id)
                                     }
                                 )
                             }
