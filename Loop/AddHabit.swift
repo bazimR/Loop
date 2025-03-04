@@ -10,7 +10,9 @@ import SwiftUI
 struct AddHabit: View {
     @State private var title: String = ""
     @State private var description: String = ""
-    @State private var type: String = ""
+    @State private var type: String = "Health"
+    @State private var showError: Bool = false
+    @State private var errorMsg: String = ""
     var habitList: HabitList
     @Binding var path: NavigationPath
     var habitTypes: [HabitType]
@@ -43,15 +45,8 @@ struct AddHabit: View {
 
                     }
                     Button {
-                        habitList
-                            .addHabit(
-                                .init(
-                                    title: title,
-                                    description: description,
-                                    type: type
-                                )
-                            )
-                        path.removeLast()
+                        handleSave()
+
                     } label: {
                         Text("Save")
                             .font(.title3.bold())
@@ -60,8 +55,39 @@ struct AddHabit: View {
                     }.buttonStyle(.borderedProminent).listRowInsets(
                         EdgeInsets())
                 }
+                if showError {
+                    Text(errorMsg)
+                        .foregroundColor(.red)
+                        .font(.footnote)
+                        .padding(.top, 5)
+                }
+
             }
         }.navigationTitle("Add habit").navigationBarTitleDisplayMode(.large)
+    }
+    func handleSave() {
+        guard !title.isEmpty else {
+            error(error: "Title is empty")
+            return
+        }
+        guard !description.isEmpty else {
+            error(error: "description is empty")
+            return
+        }
+
+        habitList
+            .addHabit(
+                .init(
+                    title: title,
+                    description: description,
+                    type: type
+                )
+            )
+        path.removeLast()
+    }
+    func error(error: String) {
+        errorMsg = error
+        showError = true
     }
 }
 
