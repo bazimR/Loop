@@ -24,12 +24,11 @@ Loop is a habit-tracking app built using **SwiftUI** to help users build and mai
 
 ---
 
-## ✨ Features
+# ✨ Features  
 
-✅ **Track Your Habits** – Add and manage daily habits easily.  
-✅ **Progress Visualization** – View habit streaks and progress over time.  
-✅ **Categorization** – Organize habits into different categories (Work, Health, Goals).  
-✅ **Minimal UI** – Simple and elegant design with smooth animations.  
-✅ **Data Persistence** – All habits are saved locally using Core Data.  
-
-
+- ✅ **Track Your Habits** – Easily add, manage, and complete daily habits.  
+- ✅ **Daily Reset** – Start fresh every day with a clean slate to build consistency.  
+- ✅ **Progress Visualization** – View your habit streaks and track progress over time.  
+- ✅ **Categorization** – Organize habits into categories like Work, Health, and Goals.  
+- ✅ **Minimal UI** – A clean and distraction-free interface for seamless habit tracking.  
+- ✅ **Data Persistence** – Your habits and progress are always saved.  
