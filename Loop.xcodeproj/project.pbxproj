@@ -45,6 +45,11 @@
 			path = LoopUITests;
 			sourceTree = "<group>";
 		};
+		A54855662D786F0A0034C50A /* Screenshots */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Screenshots;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +80,7 @@
 		A50B7F152D769A3D00E96BA2 = {
 			isa = PBXGroup;
 			children = (
+				A54855662D786F0A0034C50A /* Screenshots */,
 				A50B7F202D769A3D00E96BA2 /* Loop */,
 				A50B7F312D769A3E00E96BA2 /* LoopTests */,
 				A50B7F3B2D769A3E00E96BA2 /* LoopUITests */,
@@ -109,6 +115,7 @@
 			);
 			fileSystemSynchronizedGroups = (
 				A50B7F202D769A3D00E96BA2 /* Loop */,
+				A54855662D786F0A0034C50A /* Screenshots */,
 			);
 			name = Loop;
 			packageProductDependencies = (
