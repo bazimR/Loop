@@ -70,7 +70,7 @@ struct HabitListItem: View {
                 remove()
             } label: {
                 Image(systemName: "trash")
-                    .foregroundColor(.red)
+                    .foregroundColor(.red).font(.title3)
             }
         }
     }

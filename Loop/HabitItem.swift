@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct HabitItem: Codable, Identifiable {
+struct HabitItem: Codable, Identifiable, Hashable {
     var id: UUID = UUID()
     var title: String
     var description: String

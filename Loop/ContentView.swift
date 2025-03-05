@@ -85,9 +85,7 @@ struct ContentView: View {
                     }
                     LazyVStack {
                         ForEach(habitList.value) { item in
-                            NavigationLink {
-                                Text("details screen")
-                            } label: {
+                            NavigationLink(value: item) {
                                 HabitListItem(
                                     habitItem: item,
                                     habitTypes: habitTypes,
@@ -115,6 +113,11 @@ struct ContentView: View {
                             habitTypes: habitTypes
                         )
                     }
+                }
+            ).navigationDestination(
+                for: HabitItem.self,
+                destination: { item in
+                    HabitItemDetailView(habitItem: item, habitTypes: habitTypes)
                 }
             )
             .toolbar {
