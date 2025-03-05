@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-enum Routes {
+enum Routes: Codable {
     case add
 }
 @Observable
@@ -157,6 +157,19 @@ struct ContentView: View {
                         }
                     }
                     LazyVStack {
+                        if habitList.value.isEmpty {
+                            Text("No habits yet!")
+                                .font(.title2)
+                                .fontWeight(.semibold)
+
+                            Text(
+                                "Start building your routine by adding a new habit."
+                            )
+                            .font(.subheadline)
+                            .foregroundColor(.gray)
+                            .multilineTextAlignment(.center)
+                            .padding(.horizontal, 20)
+                        }
                         ForEach(habitList.value) { item in
                             NavigationLink(value: item) {
                                 VStack {
