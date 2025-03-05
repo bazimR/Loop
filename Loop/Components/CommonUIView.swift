@@ -19,3 +19,11 @@ struct Checkbox: View {
         }
     }
 }
+
+struct Separator: View {
+    var body: some View {
+        Rectangle()
+            .frame(height: 1)
+            .foregroundStyle(.black.opacity(0.2)).padding(.vertical,4)
+    }
+}

@@ -11,8 +11,10 @@ struct HabitTypeCardView: View {
     let type: HabitType
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
-            Image(systemName: type.systemImage)
-                .font(.title).foregroundColor(.white)
+            HStack {
+                Image(systemName: type.systemImage)
+                    .font(.title).foregroundColor(.white)
+            }
             HStack(spacing: 5) {
                 Text("\(type.count)")
                     .font(.headline)
