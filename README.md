@@ -1,6 +1,6 @@
 # 📱 Loop - Habit Tracker App
 
-Loop is a habit-tracking app built using **SwiftUI** to help users build and maintain good habits. It features a clean UI, smooth animations, and detailed tracking.
+Loop is a habit-tracking app built using **SwiftUI** to help users build and maintain good habits. It features a clean UI and tracking.
 
 ## 📷 Screenshots
 
