@@ -155,20 +155,24 @@ struct ContentView: View {
                             HabitTypeCardView(type: type)
                         }
                     }
-                    LazyVStack {
-                        if habitList.value.isEmpty {
-                            Text("No habits yet!")
-                                .font(.title2)
-                                .fontWeight(.semibold)
+                    if habitList.value.isEmpty {
 
-                            Text(
-                                "Start building your routine by adding a new habit."
-                            )
-                            .font(.subheadline)
-                            .foregroundColor(.gray)
-                            .multilineTextAlignment(.center)
-                            .padding(.horizontal, 20)
-                        }
+                        Text("No habits yet!")
+                            .font(.title2)
+                            .fontWeight(.semibold)
+                            .padding(.top, 64)
+                            .padding(.bottom, 4)
+
+                        Text(
+                            "Start building your routine by adding a new habit."
+                        )
+                        .font(.subheadline)
+                        .foregroundColor(.gray)
+                        .multilineTextAlignment(.center)
+                        .padding(.horizontal, 20)
+
+                    }
+                    LazyVStack {
                         ForEach(habitList.value) { item in
                             NavigationLink(value: item) {
                                 VStack {
