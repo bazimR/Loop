@@ -122,7 +122,6 @@ class HabitList {
 }
 
 struct ContentView: View {
-    @State private var toggle: Bool = false
     @State private var pathStore = PathStore()
     @State private var habitList = HabitList()
     var todayDate: String {
